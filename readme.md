@@ -2,5 +2,7 @@
 
 version beta 1
 
+Разрабатывают три ФКНщика
+
 Аккаунт бота в telegram:
 @The_next_one_for_test_bot
