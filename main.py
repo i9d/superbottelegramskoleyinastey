@@ -13,7 +13,7 @@ team = {'Настя': 'отвечает за поиск библеотек на 
 # Команда /start
 @bot.message_handler(commands=['start'])
 def start(message):
-    bot.send_sticker(message.chat.id, class_random.random_sticker(r"/welcome_stickers/*"))
+    bot.send_sticker(message.chat.id, class_random.random_sticker(r"/app/welcome_stickers/*"))
     start_message = f"Привет, {message.from_user.first_name}!\nЧем могу быть полезен?"  # Обращаемся к пользователю по имени в telegram
     bot.send_message(message.chat.id, start_message, parse_mode='html', reply_markup=button_setup.button)
 
@@ -62,7 +62,7 @@ def get_text(message):
 @bot.message_handler(content_types=['sticker'])
 def get_sticker(message):
     print('Получен стикер от', message.from_user.username)  # обработка в консоль
-    bot.send_sticker(message.chat.id, class_random.random_sticker(r"/stickers/*"))
+    bot.send_sticker(message.chat.id, class_random.random_sticker(r"/app/stickers/*"))
 
 
 # Бот постоянно ждёт для себя сообщения
