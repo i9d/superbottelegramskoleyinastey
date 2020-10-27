@@ -13,7 +13,7 @@ team = {'Настя': 'отвечает за поиск библеотек на 
 # Команда /start
 @bot.message_handler(commands=['start'])
 def start(message):
-    bot.send_sticker(message.chat.id, class_random.random_sticker(r"E:/FKN/New_folder/test_bot/welcome_stickers/*"))
+    bot.send_sticker(message.chat.id, class_random.random_sticker(r"/welcome_stickers/*"))
     start_message = f"Привет, {message.from_user.first_name}!\nЧем могу быть полезен?"  # Обращаемся к пользователю по имени в telegram
     bot.send_message(message.chat.id, start_message, parse_mode='html', reply_markup=button_setup.button)
 
