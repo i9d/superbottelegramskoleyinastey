@@ -62,7 +62,7 @@ def get_text(message):
 @bot.message_handler(content_types=['sticker'])
 def get_sticker(message):
     print('Получен стикер от', message.from_user.username)  # обработка в консоль
-    bot.send_sticker(message.chat.id, class_random.random_sticker(r"E:/FKN/New_folder/test_bot/stickers/*"))
+    bot.send_sticker(message.chat.id, class_random.random_sticker(r"/stickers/*"))
 
 
 # Бот постоянно ждёт для себя сообщения
