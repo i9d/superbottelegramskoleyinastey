@@ -7,6 +7,8 @@ version beta 1
 Аккаунт бота в telegram:
 @The_next_one_for_test_bot
 
+Потом переедем на @fkn_top_bot
+
 
 
 
