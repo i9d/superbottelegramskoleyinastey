@@ -98,10 +98,8 @@ def get_text(message):
     # Обработка запрещенных сообщений
     if message.text in restricted_messages and message.chat.id == config.group_id:
         # Удаление запрещенных сообщений
-        warming_message = random.choice(messages_lib.warming_message_base2), '@' + str(message.from_user.username) + '!'
-        bot.reply_to(message,
-                     warming_message)  # нужно заменить на main.bot.delete_message(message.chat.id, message.message_id)
-        bot.send_message(message.chat.id, 'Он получает mute на хз скока)00')
+        warming_message = random.choice(messages_lib.warming_message_base2) + ' @' + str(message.from_user.username) + '!\n\nПусть теперь сидит и читает только, пока не помилуют'
+        bot.reply_to(message, warming_message)  # можно заменить на main.bot.delete_message(message.chat.id, message.message_id)
         bot.restrict_chat_member(message.chat.id, message.from_user.id, until_date=int(ban_time))
         print('Даю мут пользователю', message.from_user.username)
 
