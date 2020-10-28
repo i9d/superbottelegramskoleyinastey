@@ -55,11 +55,10 @@ def get_voice(message):
     print('Пришло голосовое сообщение от', message.from_user.username)
     if (message.chat.id == config.group_id):
         # Удаление голосовых сообщений с предупреждением отправителя
-        warming_message = '@' + str(message.from_user.username) + random.choice(messages_lib.warming_message_base)
+        warming_message = '@' + str(message.from_user.username) + random.choice(messages_lib.warming_message_base) + '\nЯ это пока просто удалю, а потом уже дам бан.'
         bot.delete_message(message.chat.id, message.message_id)
         bot.send_message(message.chat.id, warming_message)
         print('Начинаю удалять сообщение')
-        bot.send_message(message.chat.id, 'Я это пока просто удалю, а потом уже дам бан.')
     else: bot.send_message(message.chat.id, 'Я не умею слушать, прости')
 
 # Обработка входа участников
