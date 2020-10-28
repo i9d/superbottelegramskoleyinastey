@@ -20,3 +20,12 @@ stickers_id = ['CAACAgIAAxkBAAJANl-Y75YQ8pGWtBipNGYpjGqrfbUgAAJaAAM_W6Y7v9jKOFYp
                'CAACAgEAAxkBAAJAV1-Y8DOsNvEAAe-RHczZdZ7dMsLmXwACDAAD9u8uLaQAATQ2tFWAcRsE'
                ]
 
+warming_message_base = [', голосовые и видео сообщения запрещены. Не надо их сюда отправлять',
+                        ', ну и сколько раз тебе говорить? Без голосовых и видео сообщений тут!',
+                        '!!!!!!!!!!!!!!!!!!!! ЗАМОЛЧИ',
+                        '!',
+                        ', ну ты меня уважаешь? Напиши, а? Боты не умеют слушать. Смотреть тоже']
+
+warming_message_base2 = ['Обнаружено запрещённое сообщение от',
+                         'Давай ты сам это удалишь... Не пиши так больше',
+                         'Не, ну это бан... Прощай,']
