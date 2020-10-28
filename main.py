@@ -1,4 +1,6 @@
 import time, telebot, config, button_setup, messages_lib, random
+from PIL import Image
+from urllib.request import urlopen
 
 # подключение к боту
 bot = telebot.TeleBot(config.token)
@@ -47,7 +49,7 @@ def help(message):
     bot.send_message(message.chat.id, help_message)
 
 
-# Модерация голосовых сообщений
+# Модерация голосовых и видео сообщений
 @bot.message_handler(content_types=['voice', 'video_note'])
 def get_voice(message):
     print('Пришло голосовое сообщение от', message.from_user.username)
@@ -59,6 +61,32 @@ def get_voice(message):
         bot.restrict_chat_member(message.chat.id, message.from_user.id, until_date=int(ban_time))
         print('Даю мут пользователю', message.from_user.username)
     else: bot.send_message(message.chat.id, 'Я не умею слушать, прости')
+
+# Обработка входа участников
+@bot.message_handler(content_types=['new_chat_members'])
+def event_member_enter(message):
+    bot.send_sticker(message.chat.id, random.choice(messages_lib.welcome_stickers_id))
+    start_message = f"Привет, @{message.from_user.username}!"  # Обращаемся к пользователю по имени в telegram
+    bot.send_message(message.chat.id, start_message)
+
+# Обработка выхода участников
+@bot.message_handler(content_types=['left_chat_member'])
+def event_member_exit(message):
+    image = Image.open(urlopen('https://cdn.everypony.ru/storage/01/75/20/2019/06/23/fba29a367f.png'))
+    bot.send_photo(message.chat.id, image)
+
+# Обработка закрепленных сообщений
+@bot.message_handler(content_types=['pinned_message'])
+def event_pin_message(message):
+    bot.send_message(message.chat.id, 'Запомните, твари!')
+
+# Обработка смены аватарки
+@bot.message_handler(content_types=['new_chat_photo', 'delete_chat_photo'])
+def event_photo_chat_change(message):
+    image = Image.open(urlopen('https://sun9-46.userapi.com/ecwT1VkRbiZDzPeLmK6BibvlxoVSyBxu983nPg/115Gbhs_ug4.jpg'))
+    if message.from_user.username != 'beta_version_fkn_bot':
+        bot.send_message(message.chat.id, 'Слыш, фото не трогай!')
+        bot.set_chat_photo(message.chat.id, image)
 
 # Обработка текстовых сообщений
 @bot.message_handler(content_types=['text'])
