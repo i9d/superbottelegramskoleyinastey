@@ -54,12 +54,12 @@ def help(message):
 def get_voice(message):
     print('Пришло голосовое сообщение от', message.from_user.username)
     if (message.chat.id == config.group_id):
-        # Удаление запрещенных сообщений
-        warming_message = random.choice(messages_lib.warming_message_base2), '@' + str(message.from_user.username) + '!'
-        bot.reply_to(message, warming_message)  # нужно заменить на main.bot.delete_message(message.chat.id, message.message_id)
-        bot.send_message(message.chat.id, 'Он получает mute на хз скока)00')
-        bot.restrict_chat_member(message.chat.id, message.from_user.id, until_date=int(ban_time))
-        print('Даю мут пользователю', message.from_user.username)
+        # Удаление голосовых сообщений с предупреждением отправителя
+        warming_message = '@' + str(message.from_user.username) + random.choice(messages_lib.warming_message_base)
+        bot.delete_message(message.chat.id, message.message_id)
+        bot.send_message(message.chat.id, warming_message)
+        print('Начинаю удалять сообщение')
+        bot.send_message(message.chat.id, 'Я это пока просто удалю, а потом уже дам бан.')
     else: bot.send_message(message.chat.id, 'Я не умею слушать, прости')
 
 # Обработка входа участников
@@ -98,12 +98,13 @@ def get_text(message):
 
     # Обработка запрещенных сообщений
     if message.text in restricted_messages and message.chat.id == config.group_id:
-        # Удаление голосовых сообщений с предупреждением отправителя
-        warming_message = '@' + str(message.from_user.username) + random.choice(messages_lib.warming_message_base)
-        bot.delete_message(message.chat.id, message.message_id)
-        bot.send_message(message.chat.id, warming_message)
-        print('Начинаю удалять сообщение')
-        bot.send_message(message.chat.id, 'Я это пока просто удалю, а потом уже реализую бан.')
+        # Удаление запрещенных сообщений
+        warming_message = random.choice(messages_lib.warming_message_base2), '@' + str(message.from_user.username) + '!'
+        bot.reply_to(message,
+                     warming_message)  # нужно заменить на main.bot.delete_message(message.chat.id, message.message_id)
+        bot.send_message(message.chat.id, 'Он получает mute на хз скока)00')
+        bot.restrict_chat_member(message.chat.id, message.from_user.id, until_date=int(ban_time))
+        print('Даю мут пользователю', message.from_user.username)
 
     if message.text == 'О проекте':
         about(message)
